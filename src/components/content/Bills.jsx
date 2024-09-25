@@ -3,14 +3,14 @@ import Bill from "../parts/Bill";
 import { useNavigate } from "react-router-dom";
 function Bills() {
 
-    const navigate  = useNavigate();
-    useEffect(()=>{
+    // const navigate  = useNavigate();
+    // useEffect(()=>{
        
-        if(!localStorage.getItem("username")){
-            navigate("/login")
+    //     if(!localStorage.getItem("username")){
+    //         navigate("/login")
             
-        }
-    },[navigate]);
+    //     }
+    // },[navigate]);
     return ( 
         <main>
                 <Bill />
