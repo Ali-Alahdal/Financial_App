@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -6,7 +7,8 @@ function BillForm(props) {
 
    
 
-    const refModal = useRef(null)
+    const refModal = useRef(null);
+    const refTotal = useRef(null);
 
     const [participants , setParticipants] = useState([]);
 
@@ -37,8 +39,35 @@ function BillForm(props) {
 
 
 
+    const addBill = async () => {
+        console.log( {
+            owner : localStorage.getItem("username"),
+            participants: participants,
+            total : refTotal.current.value
+        });
+        
+        try {
+            const response = await axios.post(`` , {
+                owner : localStorage.getItem("username"),
+                participants: participants,
+                total : refTotal.current.value
+            })
+
+            if(!response.ok) {
+                throw new Error("Something went wrong, " + response );
+            }else{
+                console.log("Added!!!");
+                
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+
+
     return ( 
-        <div ref={refModal} className="fixed container  w-screen h-screen top-0 left-0 z-1 bg-black bg-opacity-50 hidden p-12  " onClick={CloseModal}  >
+        <div ref={refModal} className="fixed w-screen h-screen top-0 left-0 z-1 bg-black bg-opacity-50 hidden p-12  " onClick={CloseModal}  >
             <div className="bg-white m-auto w-full relative  z-4 block px-3 py-3" id="Modal" >
             
             <h2 className="text-4xl text-center"> New Bill</h2>
@@ -71,11 +100,11 @@ function BillForm(props) {
 
                 <div className="flex justify-between  ">
                     <label htmlFor="total">Total</label>
-                    <input type="text"  className="ml-5 border-2  border-black w-14 text-center" />
+                    <input ref={refTotal} type="text"  className="ml-5 border-2  border-black w-14 text-center" />
                 </div>
-                <div className="container text-center">
-                    <button className="btn-primary bg-green-500 active:bg-green-600  text-white text-center p-2 rounded-md mr-4"> Add Bill   </button>
-                    <button className="bg-red-500 text-white text-center p-2 rounded-md active:bg-red-600" onClick={CloseModal} id="cancel"> Cancel  </button>
+                <div className="container text-center mt-3">
+                    <button onClick={addBill} className="btn-primary bg-green-500 active:bg-green-600  text-white text-center p-2 rounded-md mr-4"> Add Bill   </button>
+                    <button onClick={CloseModal} className="bg-red-500 text-white text-center p-2 rounded-md active:bg-red-600"  id="cancel"> Cancel  </button>
                 </div>
                 
             </div>
