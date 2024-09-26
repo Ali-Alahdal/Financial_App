@@ -10,13 +10,14 @@ function Login() {
     
     async function SignIn() {
         try {
-            const response = await  axios.post(`https://paybabay.bsite.net/api/account/login?name=${username}` );
-            if (!response.ok) {
-                throw new Error("Something went wrong, " + response );
-            }else{
-                localStorage.setItem("username" , username);
+            // const response = await  axios.post(`https://paybabay.bsite.net/api/account/login?name=${username}` );
+            // if (!response.ok) {
+            //     throw new Error("Something went wrong, " + response );
+            // }else{
+            //     localStorage.setItem("username" , username);
                 
-            }
+            // }
+            localStorage.setItem("username" , username);
         } catch (error) {
                 console.log(error);
         }
