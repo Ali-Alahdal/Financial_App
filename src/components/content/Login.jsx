@@ -18,6 +18,7 @@ function Login() {
                 
             // }
             localStorage.setItem("username" , username);
+            navigate('/');
         } catch (error) {
                 console.log(error);
         }
