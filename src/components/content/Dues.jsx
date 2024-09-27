@@ -22,9 +22,9 @@ function Dues() {
     useEffect(() =>{
         const fetchDues = async () => {
             try {
-                const response = await axios.get(`${localStorage.getItem("username")}`);
+                const response = await axios.get(`http://paybaby.somee.com/api/History/History?name=${localStorage.getItem("username")}`);
 
-                if(!response.ok) {
+                if(response.statusText != "OK") {
                     throw new Error("Something went wrong, " + response );
                 }else{
                     setDues(response.data);
@@ -39,10 +39,10 @@ function Dues() {
      },[])
     
     return ( 
-        <main className="mb-2">
+        <main className="mb-2   ">
             {dues.map((mebmer , index) =>{
                 return(
-                    <Due key={index} username={mebmer.username} totalDues={mebmer.totalDues} />
+                    <Due key={index} owner={mebmer.owner} totalDues={mebmer.total} />
                 )
             })}
           

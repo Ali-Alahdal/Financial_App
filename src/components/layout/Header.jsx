@@ -13,7 +13,7 @@ function Header() {
         }else if(location.pathname.split("/") == ",login"){
             setCurrentRoute("Login")
         }else{
-            setCurrentRoute("Dues")
+            setCurrentRoute("History")
         }
        
     },[location])

@@ -27,7 +27,7 @@ function Bill(props) {
     return ( 
         <div className="  bg-gray-100 mx-5 mt-2 text-center px-4 rounded-md py-3 ">
 
-            <h1 className="text-4xl">{props.owner} Bill : {props.total}₺</h1>
+            <h1 className="text-4xl cc">{props.owner} Bill : {props.total}₺</h1>
 
             <hr className="border-2 border-black border-dashed " />
 
@@ -45,7 +45,7 @@ function Bill(props) {
                     {props.participants.map((participant , index) =>{
                         return(
                             <tr key={index}>
-                                <td>{participant.person}</td>
+                                <td className="cc">{participant.person}</td>
                                 <td>{participant.due}₺</td>
                                 {participant.state ?  <td className="text-green-600"> Paid</td> :  <td className="text-red-600"> still</td>}
                             </tr>
@@ -60,7 +60,7 @@ function Bill(props) {
            <div className="text-right flex justify-end text-white  mt-4   " >
             {
                 props.participants.find((participant) => participant.person == localStorage.getItem("username")).state ? 
-                <h2 onClick={updateBill} className=" font-4xl   p-4 bg-green-600 rounded-full "> Paid </h2>
+                <h2 onClick={updateBill} className=" font-4xl   px-3 py-4 bg-green-600 rounded-full "> Paid </h2>
                 :   
                 <h2 onClick={updateBill} className=" font-4xl   p-4 bg-red-600 rounded-full active:bg-red-900"> Still </h2>
                    
