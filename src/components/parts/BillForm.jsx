@@ -55,7 +55,7 @@ function BillForm(props) {
         });
         
         try {
-            const response = await axios.post(`http://paybaby.somee.com/api/bill/add` , {
+            const response = await axios.post(`https://paybaby.somee.com/api/bill/add` , {
                 "owner": localStorage.getItem("username"),
                 "total": refTotal.current.value,
                 "participants": 
