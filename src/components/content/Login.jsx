@@ -13,7 +13,7 @@ function Login() {
             const response = await  axios.post(`https://paybaby.somee.com/api/account/login?name=${username}` );
             console.log(response);
             
-            if (response.statusText != "OK") {
+            if (response.status != 200) {
                 throw new Error("Something went wrong, " + response );
             
             }else{

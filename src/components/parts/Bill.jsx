@@ -12,7 +12,7 @@ function Bill(props) {
                 state : true
             });
 
-            if (response.statusText != "OK") {
+            if (response.status != 200) {
                 throw new Error("Something went wrong, " + response );
             }else{
                 console.log("Updated!!!");

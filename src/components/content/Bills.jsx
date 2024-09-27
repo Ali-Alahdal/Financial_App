@@ -29,7 +29,7 @@ function Bills() {
             const response = await axios.get(`https://paybaby.somee.com/api/bill/viewMyBills?name=${localStorage.getItem("username")}`);
             console.log(response);
             
-            if (response.statusText != "OK") {
+            if (response.status != 200) {
                 throw new Error("Something went wrong, " + response );
             }else{
                 setBills(response.data);

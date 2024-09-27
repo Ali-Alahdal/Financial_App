@@ -24,7 +24,7 @@ function Dues() {
             try {
                 const response = await axios.get(`https://paybaby.somee.com/api/History/History?name=${localStorage.getItem("username")}`);
 
-                if(response.statusText != "OK") {
+                if (response.status != 200){
                     throw new Error("Something went wrong, " + response );
                 }else{
                     setDues(response.data);
