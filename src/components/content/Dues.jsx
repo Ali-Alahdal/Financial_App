@@ -22,7 +22,7 @@ function Dues() {
     useEffect(() =>{
         const fetchDues = async () => {
             try {
-                const response = await axios.get(`http://paybaby.somee.com/api/History/History?name=${localStorage.getItem("username")}`);
+                const response = await axios.get(`https://paybaby.somee.com/api/History/History?name=${localStorage.getItem("username")}`);
 
                 if(response.statusText != "OK") {
                     throw new Error("Something went wrong, " + response );

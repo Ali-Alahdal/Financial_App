@@ -7,7 +7,7 @@ function Bill(props) {
     const navgiate = useNavigate();
     const updateBill = async() =>{
         try {
-            const response = await axios.put(`http://paybaby.somee.com/api/bill/edit?id=${props.id}&name=${localStorage.getItem("username")}&state=${true}`,{
+            const response = await axios.put(`https://paybaby.somee.com/api/bill/edit?id=${props.id}&name=${localStorage.getItem("username")}&state=${true}`,{
                 name : localStorage.getItem("username"),
                 state : true
             });

@@ -26,7 +26,7 @@ function Bills() {
        const fetchBills = async () =>{
         try {
     
-            const response = await axios.get(`http://paybaby.somee.com/api/bill/viewMyBills?name=${localStorage.getItem("username")}`);
+            const response = await axios.get(`https://paybaby.somee.com/api/bill/viewMyBills?name=${localStorage.getItem("username")}`);
             console.log(response);
             
             if (response.statusText != "OK") {
