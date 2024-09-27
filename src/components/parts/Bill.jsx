@@ -1,22 +1,22 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Bill(props) {
 
-    const participants = [{username : "Ali" , due : 200 , state: false}  , {username : "Husam" , due : 200 , state: true}  , {username : "Abshir" , due : 200 , state: true} ];
-   
+    const navgiate = useNavigate();
     const updateBill = async() =>{
         try {
-            const response = await axios.put(`/${props.id}`,{
+            const response = await axios.put(`http://paybaby.somee.com/api/bill/edit?id=${props.id}&name=${localStorage.getItem("username")}&state=${true}`,{
                 name : localStorage.getItem("username"),
                 state : true
             });
 
-            if (!response.ok) {
+            if (response.statusText != "OK") {
                 throw new Error("Something went wrong, " + response );
             }else{
                 console.log("Updated!!!");
-                
+                props.refetch.s(!props.refetch.v);
             }
         } catch (error) {
             console.log(error);
@@ -42,10 +42,10 @@ function Bill(props) {
                 </thead>
                 <tbody>
 
-                    {participants.map((participant , index) =>{
+                    {props.participants.map((participant , index) =>{
                         return(
                             <tr key={index}>
-                                <td>{participant.username}</td>
+                                <td>{participant.person}</td>
                                 <td>{participant.due}₺</td>
                                 {participant.state ?  <td className="text-green-600"> Paid</td> :  <td className="text-red-600"> still</td>}
                             </tr>
@@ -58,7 +58,15 @@ function Bill(props) {
             </table>
 
            <div className="text-right flex justify-end text-white  mt-4   " >
-                <h2 onClick={updateBill} className=" font-4xl   p-4 bg-red-700 rounded-full active:bg-red-900">Still</h2>
+            {
+                props.participants.find((participant) => participant.person == localStorage.getItem("username")).state ? 
+                <h2 onClick={updateBill} className=" font-4xl   p-4 bg-green-600 rounded-full "> Paid </h2>
+                :   
+                <h2 onClick={updateBill} className=" font-4xl   p-4 bg-red-600 rounded-full active:bg-red-900"> Still </h2>
+                   
+                
+            }
+                
            </div>
         </div>
         

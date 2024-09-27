@@ -10,13 +10,16 @@ function Login() {
     
     async function SignIn() {
         try {
-            // const response = await  axios.post(`https://paybabay.bsite.net/api/account/login?name=${username}` );
-            // if (!response.ok) {
-            //     throw new Error("Something went wrong, " + response );
-            // }else{
-            //     localStorage.setItem("username" , username);
+            const response = await  axios.post(`http://paybaby.somee.com/api/account/login?name=${username}` );
+            
+            if (response.statusText != "OK") {
+                throw new Error("Something went wrong, " + response );
+            
+            }else{
+                localStorage.setItem("username" , username);
+                console.log(response);
                 
-            // }
+            }
             localStorage.setItem("username" , username);
             navigate('/');
         } catch (error) {

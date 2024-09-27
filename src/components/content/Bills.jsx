@@ -5,10 +5,12 @@ import axios from "axios";
 function Bills() {
 
     
-    const Bills = [{id : 1 , owner : "Husam" , total : 1000} , {id : 2 ,owner : "Abshir" , total : 1000}  ,{id : 3 ,owner : "Abdulah" , total : 1000}  ];
-    const [bills , setBills] = useState(Bills);
+   
+    const [bills , setBills] = useState([]);
     const navigate  = useNavigate();
 
+
+    const [refetch, setRefetch] = useState(false);
 
     useEffect(()=>{
        
@@ -22,12 +24,12 @@ function Bills() {
 
     useEffect(() =>{
        const fetchBills = async () =>{
-    
         try {
-          
-            const response = await axios.get(`/${localStorage.getItem("username")}`);
+    
+            const response = await axios.get(`http://paybaby.somee.com/api/bill/viewMyBills?name=${localStorage.getItem("username")}`);
+            console.log(response);
             
-            if (!response.ok) {
+            if (response.statusText != "OK") {
                 throw new Error("Something went wrong, " + response );
             }else{
                 setBills(response.data);
@@ -39,12 +41,12 @@ function Bills() {
        } 
 
        fetchBills();
-    },[]);
+    },[refetch]);
     return ( 
         <main className="mb-2">
                 {bills.map((bill, index) =>{
                     return(
-                        <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} />
+                        <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} refetch={{v : refetch , s : setRefetch }} />
                     )
                 })}
                

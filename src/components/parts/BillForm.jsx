@@ -40,20 +40,37 @@ function BillForm(props) {
 
 
     const addBill = async () => {
-        console.log( {
-            owner : localStorage.getItem("username"),
-            participants: participants,
-            total : refTotal.current.value
+        console.log({
+            "owner": localStorage.getItem("username"),
+            "total": refTotal.current.value,
+            "participants": 
+                participants.map((participant)=>{
+                    return  {
+                        "person" :  participant
+                    }
+                  
+                })
+               
+            
         });
         
         try {
-            const response = await axios.post(`` , {
-                owner : localStorage.getItem("username"),
-                participants: participants,
-                total : refTotal.current.value
+            const response = await axios.post(`http://paybaby.somee.com/api/bill/add` , {
+                "owner": localStorage.getItem("username"),
+                "total": refTotal.current.value,
+                "participants": 
+                    participants.map((participant)=>{
+                        return  {
+                            "person" :  participant
+                        }
+                      
+                    })
+                   
+                
             })
-
-            if(!response.ok) {
+            console.log(response);
+            
+            if(response.statusText != "OK") {
                 throw new Error("Something went wrong, " + response );
             }else{
                 console.log("Added!!!");
@@ -70,40 +87,44 @@ function BillForm(props) {
         <div ref={refModal} className="fixed w-screen h-screen top-0 left-0 z-1 bg-black bg-opacity-50 hidden p-12  " onClick={CloseModal}  >
             <div className="bg-white m-auto w-full relative  z-4 block px-3 py-3" id="Modal" >
             
-            <h2 className="text-4xl text-center"> New Bill</h2>
+            <h2 className="text-4xl text-center "> New Bill</h2>
 
-                <form className="" onChange={HandleChanges} >
+                <form className="p-3" onChange={HandleChanges} >
                     <div className="flex justify-between ">
-                        <p>Ali</p>
-                        <input type="checkbox" name="Ali" id="Ali"  />
+                        <label htmlFor="ali">Ali</label>
+                        <input type="checkbox"  id="ali"  />
                     </div>
                     <div className="flex justify-between ">
-                        <p>Husam</p>
-                        <input type="checkbox" name="Husam" id="Husam"  />
+                        <label htmlFor="husam">Husam</label>
+                        <input type="checkbox"  id="husam"  />
                     </div>
                     <div className="flex justify-between ">
-                        <p>Abdullah</p>
-                        <input type="checkbox" name="Husam" id="Abdullah"  />
+                        <label htmlFor="abdullah">Abdullah</label>
+                        <input type="checkbox" id="abdullah"  />
                     </div>
                     <div className="flex justify-between ">
-                        <p>Osman</p>
-                        <input type="checkbox" name="Husam" id="Osman"  />
+                        <label htmlFor="osman">Osman</label>
+                        <input type="checkbox"  id="osman"  />
                     </div>
                     <div className="flex justify-between ">
-                        <p>Unkonw</p>
-                        <input type="checkbox" name="Husam" id="Unkonw"  />
+                        <label htmlFor="abshir">Abshir</label>
+                        <input type="checkbox"  id="abshir"  />
+                    </div>
+                    <div className="flex justify-between ">
+                        <label htmlFor="unknown">unknown</label>
+                        <input type="checkbox"  id="unknown"  />
                     </div>
                     
                 </form>
 
                 <hr className="border-dashed border-2 border-black my-3" />
 
-                <div className="flex justify-between  ">
+                <div className="flex justify-between p-3  ">
                     <label htmlFor="total">Total</label>
                     <input ref={refTotal} type="text"  className="ml-5 border-2  border-black w-14 text-center" />
                 </div>
-                <div className="container text-center mt-3">
-                    <button onClick={addBill} className="btn-primary bg-green-500 active:bg-green-600  text-white text-center p-2 rounded-md mr-4"> Add Bill   </button>
+                <div className="container text-center mt-3 ">
+                    <button onClick={addBill} className="btn-primary bg-green-500 active:bg-green-600  text-white text-center p-2 rounded-md mr-6"> Add Bill   </button>
                     <button onClick={CloseModal} className="bg-red-500 text-white text-center p-2 rounded-md active:bg-red-600"  id="cancel"> Cancel  </button>
                 </div>
                 
