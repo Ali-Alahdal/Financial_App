@@ -27,7 +27,7 @@ function Bills() {
         try {
     
             const response = await axios.get(`https://paybaby.somee.com/api/bill/viewMyBills?name=${localStorage.getItem("username")}`);
-            console.log(response);
+    
             
             if (response.status != 200) {
                 throw new Error("Something went wrong, " + response );
@@ -36,7 +36,7 @@ function Bills() {
             }
 
         }catch (error) {
-            console.log(error);
+        
         }
        } 
 

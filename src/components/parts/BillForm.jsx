@@ -40,19 +40,6 @@ function BillForm(props) {
 
 
     const addBill = async () => {
-        console.log({
-            "owner": localStorage.getItem("username"),
-            "total": refTotal.current.value,
-            "participants": 
-                participants.map((participant)=>{
-                    return  {
-                        "person" :  participant
-                    }
-                  
-                })
-               
-            
-        });
         
         try {
             const response = await axios.post(`https://paybaby.somee.com/api/bill/add` , {
@@ -68,7 +55,6 @@ function BillForm(props) {
                    
                 
             })
-            console.log(response);
             
             if (response.status != 200){
                 throw new Error("Something went wrong, " + response );
@@ -77,7 +63,6 @@ function BillForm(props) {
                 
             }
         } catch (error) {
-            console.log(error);
             
         }
     }
@@ -111,8 +96,8 @@ function BillForm(props) {
                         <input type="checkbox"  id="abshir"  />
                     </div>
                     <div className="flex justify-between ">
-                        <label htmlFor="unknown">unknown</label>
-                        <input type="checkbox"  id="unknown"  />
+                        <label htmlFor="unknown">Abdulrahman</label>
+                        <input type="checkbox"  id="abdulrahman"  />
                     </div>
                     
                 </form>

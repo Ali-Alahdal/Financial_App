@@ -55,7 +55,7 @@ function History() {
                     setMyHistoryBills(response.data);
                 }
             } catch (error) {
-                console.log(error);
+                
                 
             }
         }
