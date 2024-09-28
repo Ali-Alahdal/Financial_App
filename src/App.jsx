@@ -8,7 +8,7 @@ import Footer from './components/layout/Footer'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Bills from './components/content/Bills'
 import "./output.css";
-import Dues from './components/content/Dues'
+import History from './components/content/History'
 import Login from './components/content/Login'
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 
           <Routes>
             <Route index path='/' element={<Bills /> } />
-            <Route path='/history' element={<Dues />} />
+            <Route path='/history' element={<History />} />
             <Route path='/login' element={<Login />} />
           </Routes>
           
