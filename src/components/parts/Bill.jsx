@@ -29,6 +29,9 @@ function Bill(props) {
 
             <h1 className="text-4xl cc">{props.owner} Bill : {props.total}₺</h1>
 
+
+            <hr className="border-2 border-black border-dashed mt-4" />
+            <p className="my-3">{props.description ? props.description : "There are no details." }</p>
             <hr className="border-2 border-black border-dashed " />
 
             <table className="container table-fixed ">

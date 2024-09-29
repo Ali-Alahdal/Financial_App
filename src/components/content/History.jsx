@@ -86,7 +86,8 @@ function History() {
                 <div ref={myBillsRef} className="">
                     {myBills.length > 0 ? myBills.map((bill , index) =>{
                         return(
-                            <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants}  />
+                            <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} 
+                            description={bill.description ? bill.description : null} />
 
                         )
                     }) : <div className="text-center text-red-600"> There are No Bills You Added </div>}

@@ -41,12 +41,14 @@ function Bills() {
        } 
 
        fetchBills();
-    },[refetch]);
+    },[refetch,navigate]);
     return ( 
         <main className="mb-2">
                 {bills.length > 0 ? bills.map((bill, index) =>{
                     return(
-                        <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} refetch={{v : refetch , s : setRefetch }} />
+                        <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} 
+                        description={bill.description ? bill.description : null}
+                         refetch={{v : refetch , s : setRefetch }} />
                     )
                 }) : <div className="text-center text-red-600 mt-5"> There are No Bills Recently Added </div>}
                

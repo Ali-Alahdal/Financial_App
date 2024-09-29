@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 function BillForm(props) {
 
 
-   
+    const navigate = useNavigate();
 
     const refModal = useRef(null);
     const refTotal = useRef(null);
-
+    const refDetails = useRef(null);
     const [participants , setParticipants] = useState([]);
 
     const CloseModal = (e) =>{
@@ -18,7 +18,6 @@ function BillForm(props) {
         }else if(e.target.id == "cancel"){
             refModal.current.style.display = "none";
         }
-    
     }
     
     const HandleChanges = (e)=>{
@@ -51,15 +50,19 @@ function BillForm(props) {
                             "person" :  participant
                         }
                       
-                    })
+                    }),
+                description : refDetails.current.value
                    
                 
             })
             
             if (response.status != 200){
                 throw new Error("Something went wrong, " + response );
+
             }else{
                 console.log("Added!!!");
+                refModal.current.style.display = "none";
+                window.location.reload();
                 
             }
         } catch (error) {
@@ -72,7 +75,18 @@ function BillForm(props) {
         <div ref={refModal} className="fixed w-screen h-screen top-0 left-0 z-1 bg-black bg-opacity-50 hidden p-12  " onClick={CloseModal}  >
             <div className="bg-white m-auto w-full relative  z-4 block px-3 py-3" id="Modal" >
             
-            <h2 className="text-4xl text-center "> New Bill</h2>
+
+            
+                <h2 className="text-4xl text-center "> New Bill</h2>
+
+                <hr className="border-2 border-black border-dashed mt-4" />
+
+                <div className="text-center p-3  ">
+                    <label className="block" htmlFor="details">Bill Details</label>
+                    <textarea ref={refDetails} className="border-2 block self-center m-auto w-full" id="details" placeholder="süt, ekmek.........."></textarea>
+                </div>
+
+                <hr className="border-2 border-black border-dashed " />
 
                 <form className="p-3" onChange={HandleChanges} >
                     <div className="flex justify-between ">
@@ -103,6 +117,10 @@ function BillForm(props) {
                 </form>
 
                 <hr className="border-dashed border-2 border-black my-3" />
+
+
+                
+
 
                 <div className="flex justify-between p-3  ">
                     <label htmlFor="total">Total</label>
