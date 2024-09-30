@@ -23,7 +23,9 @@ function Bill(props) {
             
         }
     }
-  
+    
+
+    const state =  props.participants.find((participant) => participant.person == localStorage.getItem("username"));
     return ( 
         <div className="  bg-gray-100 mx-5 mt-2 text-center px-4 rounded-md py-3 ">
 
@@ -62,12 +64,12 @@ function Bill(props) {
 
            <div className="text-right flex justify-end text-white  mt-4   " >
             {
-                props.participants.find((participant) => participant.person == localStorage.getItem("username")).state ? 
+                state  ? state.state ?  
                 <h2  className=" font-4xl   px-3 py-4 bg-green-600 rounded-full "> Paid </h2>
                 :   
                 <h2 onClick={updateBill} className=" font-4xl   p-4 bg-red-600 rounded-full active:bg-red-900"> Still </h2>
                    
-                
+                :null
             }
                 
            </div>
