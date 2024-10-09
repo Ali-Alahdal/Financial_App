@@ -87,7 +87,7 @@ function History() {
                     {myBills.length > 0 ? myBills.map((bill , index) =>{
                         return(
                             <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} 
-                            description={bill.description ? bill.description : null} />
+                            description={bill.description ? bill.description : null} date={bill.date}/>
 
                         )
                     }) : <div className="text-center text-red-600"> There are No Bills You Added </div>}
@@ -116,7 +116,7 @@ function History() {
                 <div ref={myHistory} className="hidden">
                     {myHistoryBills.length > 0 ? myHistoryBills.map((bill , index) =>{
                         return(
-                            <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} description = {bill.description}  />
+                            <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} description = {bill.description} date={bill.date}  />
 
                         )
                     }) : <div className="text-center text-red-600"> There are No Bills Related to You </div>}
