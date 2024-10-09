@@ -62,7 +62,10 @@ function Bill(props) {
                 </tbody>
             </table>
 
-           <div className="text-right flex justify-end text-white  mt-4   " >
+           <div className="text-right flex justify-between items-center px-5 text-white  mt-4   " >
+
+                <h1 className=" text-[15px] text-[#999]  " >{props.date.toString().split('T')[0]}</h1>    
+
             {
                 state  ? state.state ?  
                 <h2  className=" font-4xl   px-3 py-4 bg-green-600 rounded-full "> Paid </h2>
