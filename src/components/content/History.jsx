@@ -63,10 +63,7 @@ function History() {
         spending[`lastMonth`]  = 0;
         const currentDate = new Date()
         myHistoryBills.map((bill , index) =>{ 
-            
-            
-            
-            
+                    
             bill.participants.map((participant , index) =>{
 
                 if(participant.person == localStorage.getItem("username")){
@@ -83,8 +80,9 @@ function History() {
         })
         console.log(spending);
         
-    },[navigate , myHistoryBills])
+    },[navigate , myHistoryBills, spending])
      
+
      useEffect(() =>{
         const fetchHistory = async () => {
             try {
@@ -102,7 +100,7 @@ function History() {
         }
 
         fetchHistory();
-     },[openMyHistory])
+     },[])
 
 
     return ( 
