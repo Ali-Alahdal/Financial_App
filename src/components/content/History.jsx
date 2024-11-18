@@ -52,18 +52,31 @@ function History() {
      const usename = localStorage.getItem("username")
      const [spending , setSpending] = useState({
         total : 0,
+        thisMonth : 0,
         lastMonth : 0,
-        LastQuarter : 0
+     
     })
 
      useEffect(() =>{
         spending[`total`]  = 0;
+        spending[`thisMonth`]  = 0;
+        spending[`lastMonth`]  = 0;
+        const currentDate = new Date()
         myHistoryBills.map((bill , index) =>{ 
+            
+            
+            
             
             bill.participants.map((participant , index) =>{
 
                 if(participant.person == localStorage.getItem("username")){
                     spending[`total`] +=  participant.due;
+                    if(bill.date.toString().split('T')[0].split("-")[1] == currentDate.getMonth()){
+                        spending[`lastMonth`] +=  participant.due;
+                    }
+                    if(bill.date.toString().split('T')[0].split("-")[1] == currentDate.getMonth() + 1){
+                        spending[`thisMonth`] +=  participant.due;
+                    }
                 }
               
             })
@@ -90,6 +103,7 @@ function History() {
 
         fetchHistory();
      },[openMyHistory])
+
 
     return ( 
         <main className="mb-2   ">
@@ -149,15 +163,26 @@ function History() {
                         )
                     }) : <div className="text-center text-red-600"> There are No Bills Related to You </div>}
                 </div>
-
-                <div className="px-3 mx-5 mt-2 bg-[var(--bg2)]">
-                    <p>
-                        Total : 
-                    </p>
+                    
+                <div className="px-3 mx-5 mt-2 bg-[var(--bg2)] py-3">
+                    <h1 className="text-3xl text-center mb-3">My Expenses</h1>
+                    <hr className="border-2 border-black border-dashed " />
+                    <div className="mt-2">
+                        <p>
+                            Current Month : <span className="text-red-500">-{spending.thisMonth.toString().split(".")[0]}</span> 
+                        </p>
+                        <p>
+                            Last Month : <span className="text-red-500"> -{spending.lastMonth.toString().split(".")[0]}</span>
+                        </p>
+                        <p>
+                            Total :  <span className="text-red-500">-{spending.total.toString().split(".")[0]}</span>
+                        </p>
+                    </div>
+                 
                 
                 </div>
 
-                <div className="mx-5 flex justify-between my-9 px-3">
+                <div className="mx-5 flex justify-between my-5 px-3">
                     <label className="text-2xl">Sign Out</label>
                     <input className="bg-red-500 text-white p-3 rounded-md" type="button" value="Sign Out" 
                         onClick={() =>{
