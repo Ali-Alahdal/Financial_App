@@ -80,7 +80,7 @@ function History() {
         })
         console.log(spending);
         
-    },[navigate , myHistoryBills, spending])
+    },[navigate , myHistoryBills, spending , openMyHistory])
      
 
      useEffect(() =>{
