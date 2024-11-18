@@ -52,7 +52,7 @@ function Bills() {
                     return(
                         <Bill key={bill.id} id={bill.id} owner={bill.owner} total={bill.total} participants={bill.participants} 
                         description={bill.description ? bill.description : null}
-                         refetch={{v : refetch , s : setRefetch }} />
+                         refetch={{v : refetch , s : setRefetch }} date={bill.date} />
                     )
                 }) : <div className="text-center text-red-600 mt-5"> There are No Bills Recently Added </div>}
               
