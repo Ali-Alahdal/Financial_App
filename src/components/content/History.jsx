@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Bill from "../parts/Bill";
+
+
 function History() {
 
     
@@ -12,6 +14,8 @@ function History() {
     const [openMyBills , setOpenMyBills] = useState(true);
     const [openMyHistory , setOpenMyHistory] = useState(false);
     const myBillsRef = useRef(null);
+
+    
 
     const myHistory = useRef(null);
 
@@ -24,6 +28,7 @@ function History() {
         }
     },[navigate]);
 
+    
 
     useEffect(() =>{
         const fetchMyBills = async () => {
@@ -43,6 +48,29 @@ function History() {
 
         fetchMyBills();
      },[openMyBills])
+
+     const usename = localStorage.getItem("username")
+     const [spending , setSpending] = useState({
+        total : 0,
+        lastMonth : 0,
+        LastQuarter : 0
+    })
+
+     useEffect(() =>{
+        spending[`total`]  = 0;
+        myHistoryBills.map((bill , index) =>{ 
+            
+            bill.participants.map((participant , index) =>{
+
+                if(participant.person == localStorage.getItem("username")){
+                    spending[`total`] +=  participant.due;
+                }
+              
+            })
+        })
+        console.log(spending);
+        
+    },[navigate , myHistoryBills])
      
      useEffect(() =>{
         const fetchHistory = async () => {
@@ -121,7 +149,15 @@ function History() {
                         )
                     }) : <div className="text-center text-red-600"> There are No Bills Related to You </div>}
                 </div>
-                <div className="mx-5 flex justify-between">
+
+                <div className="px-3 mx-5 mt-2 bg-[var(--bg2)]">
+                    <p>
+                        Total : 
+                    </p>
+                
+                </div>
+
+                <div className="mx-5 flex justify-between my-9 px-3">
                     <label className="text-2xl">Sign Out</label>
                     <input className="bg-red-500 text-white p-3 rounded-md" type="button" value="Sign Out" 
                         onClick={() =>{
@@ -131,6 +167,8 @@ function History() {
                     />
                 </div>
             </div>
+
+            
             
         </main>
      );

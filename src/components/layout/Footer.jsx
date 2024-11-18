@@ -3,8 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import BillForm from "../parts/BillForm";
 import { useNavigate } from "react-router-dom";
 function Footer() {
-    const [open , setOpen] = useState(false);
 
+
+    const [open , setOpen] = useState(false);
     const [loggedIn , setLoggedIn] = useState(false);
     const navigate  = useNavigate();
 
@@ -24,8 +25,8 @@ function Footer() {
     
         {loggedIn ? 
             <> 
-            <footer className="w-screen h-20   px-6  fake-footer  "></footer>
-            <footer className="w-screen fixed h-20 flex justify-between items-center px-6 bottom-0 border-top border-t-2 border-black ">
+            <footer className="w-screen h-20   px-6  fake-footer    "></footer>
+            <footer className="w-screen fixed h-20 flex justify-between items-center px-6 bottom-0 border-top border-t-2 border-black bg-[var(--bg)]  ">
                 
                 
                 <NavLink className={({ isActive }) => isActive ? " bg-gray-100 px-5 py-3    " : "px-5 py-3 " } to={"/"}>

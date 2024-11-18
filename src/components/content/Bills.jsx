@@ -21,7 +21,6 @@ function Bills() {
     },[navigate]);
 
 
-
     useEffect(() =>{
        const fetchBills = async () =>{
         try {
@@ -42,6 +41,11 @@ function Bills() {
 
        fetchBills();
     },[refetch,navigate]);
+
+
+ 
+
+  
     return ( 
         <main className="mb-2">
                 {bills.length > 0 ? bills.map((bill, index) =>{
@@ -51,7 +55,7 @@ function Bills() {
                          refetch={{v : refetch , s : setRefetch }} />
                     )
                 }) : <div className="text-center text-red-600 mt-5"> There are No Bills Recently Added </div>}
-               
+              
               
         </main>
      );
